@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package io.github.jamalam360.colossal_cakes;
+package io.github.jamalam360.colossal.cakes;
 
 import io.github.jamalam360.jamlib.log.JamLibLogger;
 import net.fabricmc.api.ModInitializer;
@@ -30,7 +30,7 @@ import net.fabricmc.api.ModInitializer;
 public class ColossalCakesInit implements ModInitializer {
     public static final String MOD_ID = "colossal_cakes";
     public static final String MOD_NAME = "Colossal Cakes";
-    public static final JamLibLogger LOGGER = JamLibLogger.getLogger(MOD_NAME);
+    public static final JamLibLogger LOGGER = JamLibLogger.getLogger(MOD_ID);
 
     @Override
     public void onInitialize() {
