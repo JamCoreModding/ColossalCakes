@@ -1,26 +1,26 @@
 {
   "schemaVersion": 1,
-  "id": "templatemod",
+  "id": "colossal_cakes",
   "version": "${version}",
-  "name": "Template Mod",
-  "description": "A Fabric mod template",
+  "name": "Colossal Cakes",
+  "description": "Ever wanted h u g e cakes? Of course you have!",
   "authors": [
     "Jamalam"
   ],
   "contact": {
-    "sources": "https://github.com/JamCoreModding/FabricTemplateMod",
-    "issues": "https://github.com/JamCoreModding/FabricTemplateMod/issues"
+    "sources": "https://github.com/JamCoreModding/ColossalCakes",
+    "issues": "https://github.com/JamCoreModding/ColossalCakes/issues"
   },
   "license": "MIT",
-  "icon": "assets/templatemod/icon.png",
+  "icon": "assets/colossal_cakes/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.jamalam360.templatemod.TemplateModInit"
+      "io/github/jamalam360/colossal/cakes/ColossalCakesInit"
     ]
   },
   "mixins": [
-    "templatemod.mixins.json"
+    "colossal_cakes.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.12.5",
@@ -28,7 +28,7 @@
     "jamlib": ">=0.1.0"
   },
   "custom": {
-    "notify_gradle_properties_url": "https://raw.githubusercontent.com/JamCoreModding/FabricTemplateMod/main/gradle.properties",
+    "notify_gradle_properties_url": "https://raw.githubusercontent.com/JamCoreModding/ColossalCakes/main/gradle.properties",
     "notify_gradle_properties_key": "mod_version"
   }
 }

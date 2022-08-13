@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-package io.github.jamalam360.templatemod;
+package io.github.jamalam360.colossal_cakes;
 
 import io.github.jamalam360.jamlib.log.JamLibLogger;
 import net.fabricmc.api.ModInitializer;
 
-public class TemplateModInit implements ModInitializer {
-    public static final String MOD_ID = "templatemod";
-    public static final String MOD_NAME = "Template Mod";
+public class ColossalCakesInit implements ModInitializer {
+    public static final String MOD_ID = "colossal_cakes";
+    public static final String MOD_NAME = "Colossal Cakes";
     public static final JamLibLogger LOGGER = JamLibLogger.getLogger(MOD_NAME);
 
     @Override
