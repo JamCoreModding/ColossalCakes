@@ -16,7 +16,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io/github/jamalam360/colossal/cakes/ColossalCakesInit"
+      "io.github.jamalam360.colossal.cakes.ColossalCakesInit"
+    ],
+    "client": [
+      "io.github.jamalam360.colossal.cakes.ColossalCakesClientInit"
+    ],
+    "emi": [
+      "io.github.jamalam360.colossal.cakes.recipe.emi.ColossalCakesEmiPlugin"
     ]
   },
   "mixins": [
@@ -25,7 +31,11 @@
   "depends": {
     "fabricloader": ">=0.12.5",
     "fabric": "*",
-    "jamlib": ">=0.1.0"
+    "jamlib": ">=0.4.0"
+  },
+  "suggests": {
+    "emi": "*",
+    "modmenu": "*"
   },
   "custom": {
     "notify_gradle_properties_url": "https://raw.githubusercontent.com/JamCoreModding/ColossalCakes/main/gradle.properties",

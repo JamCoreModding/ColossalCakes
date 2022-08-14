@@ -16,7 +16,7 @@ version = mod_version
 
 repositories {
     val mavenUrls = mapOf(
-        Pair("https://maven.terraformersmc.com/releases", listOf("com.terraformersmc")),
+        Pair("https://maven.terraformersmc.com/releases", listOf("com.terraformersmc", "dev.emi")),
         Pair("https://api.modrinth.com/maven", listOf("maven.modrinth")),
         Pair("https://maven.jamalam.tech/releases", listOf("io.github.jamalam360")),
     )
@@ -42,9 +42,10 @@ dependencies {
     modImplementation(libs.fabric.loader)
     modImplementation(libs.fabric.api)
 
-    modImplementation(libs.required.jamlib)
+    modApi(libs.required.jamlib)
 
-    modApi(libs.optional.mod.menu)
+    modImplementation(libs.optional.emi)
+    modImplementation(libs.optional.mod.menu)
 
     modLocalRuntime(libs.runtime.lazy.dfu)
 }

@@ -24,16 +24,44 @@
 
 package io.github.jamalam360.colossal.cakes;
 
+import io.github.jamalam360.colossal.cakes.recipe.MixingRecipeSerializer;
+import io.github.jamalam360.colossal.cakes.recipe.MixingRecipeType;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesBlocks;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesItems;
 import io.github.jamalam360.jamlib.log.JamLibLogger;
+import io.github.jamalam360.jamlib.registry.JamLibRegistry;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class ColossalCakesInit implements ModInitializer {
     public static final String MOD_ID = "colossal_cakes";
     public static final String MOD_NAME = "Colossal Cakes";
     public static final JamLibLogger LOGGER = JamLibLogger.getLogger(MOD_ID);
 
+    public static Identifier idOf(String path) {
+        return new Identifier(MOD_ID, path);
+    }
+
     @Override
     public void onInitialize() {
+        Registry.register(
+                Registry.RECIPE_SERIALIZER,
+                idOf("mixing"),
+                MixingRecipeSerializer.INSTANCE
+        );
+
+        Registry.register(
+                Registry.RECIPE_TYPE,
+                idOf("mixing"),
+                MixingRecipeType.INSTANCE
+        );
+
+        JamLibRegistry.register(
+                ColossalCakesBlocks.class,
+                ColossalCakesItems.class
+        );
+
         LOGGER.logInitialize();
     }
 }
