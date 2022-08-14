@@ -12,7 +12,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.Items;
 
 /**
  * @author Jamalam
@@ -22,9 +21,7 @@ import net.minecraft.item.Items;
 @ContentRegistry(ColossalCakesInit.MOD_ID)
 public class ColossalCakesBlocks {
     public static final Block MIXING_BOWL = new MixingBowlBlock(AbstractBlock.Settings.of(Material.STONE).requiresTool());
-    public static final BlockEntityType<MixingBowlBlockEntity> MIXING_BOWL_BLOCK_ENTITY = BlockEntityType.Builder.create(MixingBowlBlockEntity::new, MIXING_BOWL).build(null);
-
-    private static final AbstractBlock.Settings SPONGE_SETTINGS = AbstractBlock.Settings.of(Material.CAKE);
+    private static final AbstractBlock.Settings SPONGE_SETTINGS = AbstractBlock.Settings.of(Material.CAKE);    public static final BlockEntityType<MixingBowlBlockEntity> MIXING_BOWL_BLOCK_ENTITY = BlockEntityType.Builder.create(MixingBowlBlockEntity::new, MIXING_BOWL).build(null);
     public static final Block VICTORIA_SPONGE = new Block(SPONGE_SETTINGS);
 
     @BlockItemFactory
@@ -32,4 +29,6 @@ public class ColossalCakesBlocks {
         Item.Settings settings = new Item.Settings().group(ItemGroup.FOOD);
         return new BlockItem(block, settings);
     }
+
+
 }
