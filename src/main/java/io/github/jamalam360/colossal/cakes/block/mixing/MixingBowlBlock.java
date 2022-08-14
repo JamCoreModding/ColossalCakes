@@ -77,6 +77,9 @@ public class MixingBowlBlock extends BlockWithEntity {
                         }
 
                         player.getInventory().offerOrDrop(match.get().getOutput().copy());
+
+                        player.getStackInHand(hand).damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+                        player.getItemCooldownManager().set(ColossalCakesItems.WHISK, 20);
                     } else {
                         world.playSound(
                                 pos.getX(),

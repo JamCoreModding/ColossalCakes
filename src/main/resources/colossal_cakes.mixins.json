@@ -3,8 +3,11 @@
   "package": "io.github.jamalam360.colossal.cakes.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "BlockMixin",
     "CampfireBlockEntityAccessor",
-    "CampfireBlockEntityMixin"
+    "CampfireBlockEntityMixin",
+    "LivingEntityMixin",
+    "PlayerEntityMixin"
   ],
   "client": [],
   "server": [],

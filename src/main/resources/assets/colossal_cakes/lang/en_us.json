@@ -1,7 +1,9 @@
 {
   "emi.category.colossal_cakes.mixing": "Mixing",
   "item.colossal_cakes.whisk": "Whisk",
-  "item.colossal_cakes.mixing_bowl": "Mixing Bowl",
-  "item.colossal_cakes.victoria_sponge": "Victoria Sponge",
-  "item.colossal_cakes.victoria_sponge_batter": "Victoria Sponge Batter"
+  "item.colossal_cakes.rolling_pin": "Rolling Pin",
+  "block.colossal_cakes.mixing_bowl": "Mixing Bowl",
+  "block.colossal_cakes.victoria_sponge": "Victoria Sponge",
+  "item.colossal_cakes.victoria_sponge_batter": "Victoria Sponge Batter",
+  "subtitles.colossal_cakes.rolling_pin": "Rolling Pin Attacks (Bonk)"
 }
