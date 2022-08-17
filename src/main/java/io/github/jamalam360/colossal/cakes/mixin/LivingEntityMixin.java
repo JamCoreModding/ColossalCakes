@@ -49,18 +49,17 @@ public abstract class LivingEntityMixin extends Entity implements Ducks.LivingEn
 
     @Override
     public void onWhisked(PlayerEntity whisker) {
-        this.colossalcakes$whiskedTicks += 20;
+        this.colossalcakes$whiskedTicks += 60;
     }
 
     @Inject(
-            method = "tickMovement",
+            method = "tick",
             at = @At("HEAD")
     )
     private void colossalcakes$tickWhiskSpin(CallbackInfo ci) {
         if (this.colossalcakes$whiskedTicks > 0) {
             this.colossalcakes$whiskedTicks--;
-
-            this.refreshPositionAndAngles(this.getBlockPos(), this.getYaw() + 10, this.getPitch());
+            this.setYaw(this.getYaw() + 60);
         }
     }
 }

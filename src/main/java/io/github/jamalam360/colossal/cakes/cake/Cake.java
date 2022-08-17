@@ -31,6 +31,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -65,6 +66,10 @@ public class Cake {
 
     protected void add(BlockPos pos) {
         this.positions.add(pos);
+    }
+
+    protected void addAll(Collection<BlockPos> positions) {
+        this.positions.addAll(positions);
     }
 
     public Pair<Integer, Float> eat(World world) {

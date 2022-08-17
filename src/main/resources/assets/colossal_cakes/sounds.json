@@ -1,11 +1,11 @@
 {
-  "bonk": {
+  "item_rolling_pin_bonk": {
     "subtitle": "subtitles.colossal_cakes.rolling_pin",
     "sounds": [
       "colossal_cakes:bonk"
     ]
   },
-  "bonk_sweep": {
+  "item_rolling_pin_bonk_sweep": {
     "subtitle": "subtitles.colossal_cakes.rolling_pin",
     "sounds": [
       "colossal_cakes:bonk_sweep"

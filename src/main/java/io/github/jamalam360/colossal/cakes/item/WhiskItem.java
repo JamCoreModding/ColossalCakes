@@ -44,6 +44,8 @@ public class WhiskItem extends ToolItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+        if (user.getItemCooldownManager().isCoolingDown(ColossalCakesItems.WHISK)) return ActionResult.PASS;
+
         ((Ducks.LivingEntity) entity).onWhisked(user);
 
         if (!user.world.isClient) {

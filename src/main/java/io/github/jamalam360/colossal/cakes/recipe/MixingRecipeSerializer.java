@@ -43,7 +43,7 @@ public class MixingRecipeSerializer implements RecipeSerializer<MixingRecipe> {
     public static final MixingRecipeSerializer INSTANCE = new MixingRecipeSerializer();
     private static final Gson GSON = new Gson();
 
-    private MixingRecipeSerializer() {
+    MixingRecipeSerializer() {
     }
 
     @Override

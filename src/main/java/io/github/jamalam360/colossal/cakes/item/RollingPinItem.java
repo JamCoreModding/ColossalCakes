@@ -27,6 +27,7 @@ package io.github.jamalam360.colossal.cakes.item;
 import io.github.jamalam360.colossal.cakes.ColossalCakesInit;
 import io.github.jamalam360.colossal.cakes.cake.Cake;
 import io.github.jamalam360.colossal.cakes.cake.CakeTraverser;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.colossal.cakes.util.Sound;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -42,9 +43,6 @@ import net.minecraft.util.ActionResult;
  * @author Jamalam
  */
 public class RollingPinItem extends SwordItem {
-    public static final SoundEvent BONK = new SoundEvent(ColossalCakesInit.idOf("bonk"));
-    public static final SoundEvent BONK_SWEEP = new SoundEvent(ColossalCakesInit.idOf("bonk_sweep"));
-
     public RollingPinItem(Settings settings) {
         super(ToolMaterials.WOOD, 6, -3.1f, settings);
     }
@@ -62,18 +60,18 @@ public class RollingPinItem extends SwordItem {
     }
 
     public static Sound getWeakAttackSound() {
-        return new Sound(BONK, 0.8f, 1.3f);
+        return new Sound(ColossalCakesSounds.ITEM_ROLLING_PIN_BONK, 0.8f, 1.3f);
     }
 
     public static Sound getStrongAttackSound() {
-        return new Sound(BONK, 1f, 1f);
+        return new Sound(ColossalCakesSounds.ITEM_ROLLING_PIN_BONK, 1f, 1f);
     }
 
     public static Sound getCritAttackSound() {
-        return new Sound(BONK, 1.25f, 0.8f);
+        return new Sound(ColossalCakesSounds.ITEM_ROLLING_PIN_BONK, 1.25f, 0.8f);
     }
 
     public static Sound getSweepAttackSound() {
-        return new Sound(BONK_SWEEP, 1f, 1f);
+        return new Sound(ColossalCakesSounds.ITEM_ROLLING_PIN_BONK_SWEEP, 1f, 1f);
     }
 }

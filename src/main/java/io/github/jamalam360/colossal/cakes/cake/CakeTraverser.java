@@ -24,12 +24,10 @@
 
 package io.github.jamalam360.colossal.cakes.cake;
 
-import io.github.jamalam360.colossal.cakes.ColossalCakesInit;
-import net.minecraft.block.BlockState;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +37,7 @@ import java.util.List;
  */
 public class CakeTraverser {
     public static boolean traverse(BlockView blockView, BlockPos start) {
-        if (!blockView.getBlockState(start).isIn(ColossalCakesInit.CAKE) || Cake.get(start) != null) return false;
+        if (!blockView.getBlockState(start).isIn(ColossalCakesTags.CAKE) || Cake.get(start) != null) return false;
 
         Cake cake = new Cake();
         cake.add(start);
@@ -56,8 +54,6 @@ public class CakeTraverser {
     }
 
     private static void traverse(BlockView blockView, Cake cake, List<BlockPos> explored, BlockPos start) {
-        BlockPos center = start.toImmutable();
-
         for (Direction dir : Direction.values()) {
             BlockPos.Mutable mutable = new BlockPos.Mutable(start.getX(), start.getY(), start.getZ());
             mutable.move(dir);
@@ -65,8 +61,14 @@ public class CakeTraverser {
             if (explored.stream().anyMatch((pos) -> pos.equals(mutable))) continue;
             explored.add(mutable);
 
-            BlockState state = blockView.getBlockState(mutable);
-            if (state.isIn(ColossalCakesInit.CAKE)) {
+            Cake existing = Cake.get(mutable);
+
+            if (existing != null) {
+                cake.add(mutable);
+                cake.addAll(existing.getPositions());
+                existing.discard();
+                traverse(blockView, cake, explored, mutable);
+            } else if (blockView.getBlockState(mutable).isIn(ColossalCakesTags.CAKE)) {
                 cake.add(mutable);
                 traverse(blockView, cake, explored, mutable);
             }
