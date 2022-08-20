@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "colossal_cakes:victoria_sponge"
+    "colossal_cakes:carrot_cake",
+    "colossal_cakes:chocolate_cake",
+    "colossal_cakes:red_velvet",
+    "colossal_cakes:victoria_sponge",
+    "colossal_cakes:icing",
+    "colossal_cakes:berry_icing"
   ]
 }

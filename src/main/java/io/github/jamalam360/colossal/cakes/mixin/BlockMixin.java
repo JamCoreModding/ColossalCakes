@@ -49,7 +49,7 @@ public class BlockMixin {
         Cake cake = Cake.get(pos);
 
         if (cake != null) {
-            cake.discard();
+            cake.remove(pos);
         }
     }
 }

@@ -93,6 +93,8 @@ public class MixingBowlBlock extends BlockWithEntity {
                         );
                     }
 
+                    mixingBowlBlockEntity.inventory.clear();
+
                     return ActionResult.SUCCESS;
                 } else {
                     return ActionResult.FAIL;
@@ -155,6 +157,6 @@ public class MixingBowlBlock extends BlockWithEntity {
 
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return VoxelShapes.cuboid(2D / 16D, 0D, 2D / 16D, 1D - 2D / 16D, 0.5D, 1D - 2D / 16D);
+        return VoxelShapes.cuboid(1D / 16D, 0D, 1D / 16D, 1D - 1D / 16D, 0.75D, 1D - 1D / 16D);
     }
 }

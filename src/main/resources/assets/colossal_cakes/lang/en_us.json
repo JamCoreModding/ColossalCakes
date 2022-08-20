@@ -1,9 +1,22 @@
 {
   "emi.category.colossal_cakes.mixing": "Mixing",
+  "subtitles.colossal_cakes.rolling_pin": "Rolling Pin Bonks",
+  "colossal_cakes.advancements.rolling_pin.title": "Bonk!",
+  "colossal_cakes.advancements.rolling_pin.description": "Useful for assembling cakes...and hitting things...",
+  "colossal_cakes.advancements.berry_icing.title": "One of your 5 a day!",
+  "colossal_cakes.advancements.berry_icing.description": "It has berries, that makes it healthy, right?",
   "item.colossal_cakes.whisk": "Whisk",
   "item.colossal_cakes.rolling_pin": "Rolling Pin",
+  "item.colossal_cakes.rolling_pin.tooltip": "Right-click to assemble a cake.",
   "block.colossal_cakes.mixing_bowl": "Mixing Bowl",
+  "block.colossal_cakes.carrot_cake": "Carrot Cake",
+  "item.colossal_cakes.carrot_cake_batter": "Carrot Cake Batter",
+  "block.colossal_cakes.chocolate_cake": "Chocolate Cake",
+  "item.colossal_cakes.chocolate_cake_batter": "Chocolate Cake Batter",
+  "block.colossal_cakes.red_velvet": "Red Velvet",
+  "item.colossal_cakes.red_velvet_batter": "Red Velvet Batter",
   "block.colossal_cakes.victoria_sponge": "Victoria Sponge",
   "item.colossal_cakes.victoria_sponge_batter": "Victoria Sponge Batter",
-  "subtitles.colossal_cakes.rolling_pin": "Rolling Pin Attacks (Bonk)"
+  "block.colossal_cakes.icing": "Icing",
+  "block.colossal_cakes.berry_icing": "Berry Icing"
 }

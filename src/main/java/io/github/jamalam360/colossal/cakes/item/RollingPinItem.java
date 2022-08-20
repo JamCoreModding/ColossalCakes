@@ -24,39 +24,32 @@
 
 package io.github.jamalam360.colossal.cakes.item;
 
-import io.github.jamalam360.colossal.cakes.ColossalCakesInit;
 import io.github.jamalam360.colossal.cakes.cake.Cake;
 import io.github.jamalam360.colossal.cakes.cake.CakeTraverser;
 import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.colossal.cakes.util.Sound;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * @author Jamalam
  */
 public class RollingPinItem extends SwordItem {
     public RollingPinItem(Settings settings) {
-        super(ToolMaterials.WOOD, 6, -3.1f, settings);
-    }
-
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
-        return CakeTraverser.traverse(context.getWorld(), context.getBlockPos()) ? ActionResult.SUCCESS : ActionResult.FAIL;
-    }
-
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        target.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, target.world.random.nextInt(40) + 40, 4), attacker);
-        return super.postHit(stack, target, attacker);
+        super(ToolMaterials.WOOD, 5, -3.3f, settings);
     }
 
     public static Sound getWeakAttackSound() {
@@ -73,5 +66,28 @@ public class RollingPinItem extends SwordItem {
 
     public static Sound getSweepAttackSound() {
         return new Sound(ColossalCakesSounds.ITEM_ROLLING_PIN_BONK_SWEEP, 1f, 1f);
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+        if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
+        boolean success = CakeTraverser.traverse(context.getWorld(), context.getBlockPos());
+        if (success)
+            context.getStack().damage(1, context.getPlayer(), (player) -> player.sendToolBreakStatus(context.getHand()));
+        return success ? ActionResult.SUCCESS : ActionResult.FAIL;
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        if (target instanceof PlayerEntity) {
+            target.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, target.world.random.nextInt(40) + 40, 4), attacker);
+        }
+
+        return super.postHit(stack, target, attacker);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("item.colossal_cakes.rolling_pin.tooltip"));
     }
 }

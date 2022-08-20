@@ -44,7 +44,7 @@ public class MixingBowlBlockEntityRenderer implements BlockEntityRenderer<Mixing
 
     @Override
     public void render(MixingBowlBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-        double currentHeight = 2D / 24;
+        double currentHeight = 5D / 24;
         int fixedLight = WorldRenderer.getLightmapCoordinates(entity.getWorld(), entity.getPos().up());
 
         for (ItemStack stack : entity.inventory.getStacks()) {

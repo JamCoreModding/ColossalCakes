@@ -1,0 +1,23 @@
+{
+  "type": "colossal_cakes:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    }
+  ],
+  "output": {
+    "item": "colossal_cakes:berry_icing"
+  }
+}

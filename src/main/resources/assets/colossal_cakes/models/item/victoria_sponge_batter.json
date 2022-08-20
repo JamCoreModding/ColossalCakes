@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "colossal_cakes:item/victoria_sponge_batter"
+  }
+}

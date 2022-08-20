@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "colossal_cakes:red_velvet_batter"
+  },
+  "result": "colossal_cakes:red_velvet",
+  "experience": 0.1,
+  "cookingtime": 200
+}

@@ -28,6 +28,7 @@ import io.github.jamalam360.colossal.cakes.ColossalCakesInit;
 import io.github.jamalam360.colossal.cakes.item.RollingPinItem;
 import io.github.jamalam360.colossal.cakes.item.WhiskItem;
 import io.github.jamalam360.jamlib.registry.annotation.ContentRegistry;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
@@ -39,8 +40,11 @@ import net.minecraft.item.Items;
 @SuppressWarnings("unused")
 @ContentRegistry(ColossalCakesInit.MOD_ID)
 public class ColossalCakesItems {
-    public static final Item VICTORIA_SPONGE_BATTER = new Item(new Item.Settings().group(ItemGroup.FOOD).recipeRemainder(Items.BUCKET));
-
-    public static final Item WHISK = new WhiskItem(new Item.Settings().group(ItemGroup.FOOD));
-    public static final Item ROLLING_PIN = new RollingPinItem(new Item.Settings().group(ItemGroup.FOOD));
+    public static final Item WHISK = new WhiskItem(new Item.Settings().group(ColossalCakesInit.ITEMS));
+    public static final Item ROLLING_PIN = new RollingPinItem(new Item.Settings().group(ColossalCakesInit.ITEMS));
+    private static final Item.Settings BATTER_SETTINGS = new Item.Settings().group(ColossalCakesInit.ITEMS).recipeRemainder(Items.BUCKET).maxCount(16);
+    public static final Item CARROT_CAKE_BATTER = new Item(BATTER_SETTINGS);
+    public static final Item CHOCOLATE_CAKE_BATTER = new Item(BATTER_SETTINGS);
+    public static final Item RED_VELVET_BATTER = new Item(BATTER_SETTINGS);
+    public static final Item VICTORIA_SPONGE_BATTER = new Item(BATTER_SETTINGS);
 }

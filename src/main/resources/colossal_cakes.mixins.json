@@ -6,10 +6,8 @@
     "BlockMixin",
     "CampfireBlockEntityAccessor",
     "CampfireBlockEntityMixin",
-    "LivingEntityMixin",
     "PlayerEntityMixin"
   ],
-  "client": [],
   "server": [],
   "injectors": {
     "defaultRequire": 1

@@ -1,0 +1,41 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "display": {
+    "icon": {
+      "item": "colossal_cakes:rolling_pin",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "colossal_cakes.advancements.rolling_pin.title"
+    },
+    "description": {
+      "translate": "colossal_cakes.advancements.rolling_pin.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 20
+  },
+  "criteria": {
+    "rolling_pin": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "colossal_cakes:rolling_pin"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "rolling_pin"
+    ]
+  ]
+}

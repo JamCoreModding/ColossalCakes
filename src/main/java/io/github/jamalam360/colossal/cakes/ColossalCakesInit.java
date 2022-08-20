@@ -24,7 +24,6 @@
 
 package io.github.jamalam360.colossal.cakes;
 
-import com.mojang.datafixers.util.Pair;
 import io.github.jamalam360.colossal.cakes.cake.Cake;
 import io.github.jamalam360.colossal.cakes.recipe.MixingRecipeSerializer;
 import io.github.jamalam360.colossal.cakes.recipe.MixingRecipeType;
@@ -34,7 +33,9 @@ import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.jamlib.log.JamLibLogger;
 import io.github.jamalam360.jamlib.registry.JamLibRegistry;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
@@ -42,7 +43,10 @@ import net.minecraft.util.registry.Registry;
 
 public class ColossalCakesInit implements ModInitializer {
     public static final String MOD_ID = "colossal_cakes";
-    public static final String MOD_NAME = "Colossal Cakes";
+    /*
+    * It was easier to do this so I could easily swap out to my own ItemGroup if I wanted.
+    */
+    public static ItemGroup ITEMS = ItemGroup.FOOD;
     public static final JamLibLogger LOGGER = JamLibLogger.getLogger(MOD_ID);
 
     public static Identifier idOf(String path) {
@@ -68,25 +72,6 @@ public class ColossalCakesInit implements ModInitializer {
                 ColossalCakesItems.class,
                 ColossalCakesSounds.class
         );
-
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            if (player.getStackInHand(hand).isEmpty()) {
-                Cake cake = Cake.get(hitResult.getBlockPos());
-
-                if (player.isSneaking()) {
-                    player.sendMessage(Text.literal(cake == null ? "No Cake :(" : "Much Cake :) - " + cake.hashCode()), true);
-                    return ActionResult.SUCCESS;
-                }
-
-                if (cake != null) {
-                    Pair<Integer, Float> hungerValues = cake.eat(world);
-                    player.getHungerManager().add(hungerValues.getFirst(), hungerValues.getSecond());
-                    return ActionResult.SUCCESS;
-                }
-            }
-
-            return ActionResult.PASS;
-        });
 
         LOGGER.logInitialize();
     }
