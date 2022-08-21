@@ -71,12 +71,6 @@ public class RollingPinItem extends SwordItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        System.out.println(context.getWorld().isClient ? "C" : "S");
-        Cake c= Cake.get(context.getBlockPos());
-
-        if (c != null) {
-            System.out.println(c.getPositions().toString());
-        }
         if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
         boolean success = CakeTraverser.traverse(context.getWorld(), context.getBlockPos());
         if (success && !context.getWorld().isClient){
@@ -86,7 +80,7 @@ public class RollingPinItem extends SwordItem {
         }
 
         System.out.println(success);
-        return success ? (context.getWorld().isClient ? ActionResult.PASS : ActionResult.SUCCESS) : ActionResult.FAIL;
+        return success ? ActionResult.SUCCESS : ActionResult.FAIL;
     }
 
     @Override

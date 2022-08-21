@@ -50,6 +50,7 @@ public class Cake {
     private final List<BlockPos> positions;
     private int eatProgress = 0;
     private int eatProgressMax = 0;
+
     protected Cake() {
         this.positions = new ArrayList<>();
         CAKES.add(this);
@@ -110,19 +111,21 @@ public class Cake {
 
         BlockPos random = this.positions.get(world.random.nextInt(this.positions.size()));
 
-        if (world.getBlockState(random).getBlock() instanceof EdibleBlock edible) {
-            FoodComponent food = edible.getFoodComponent();
-            player.getHungerManager().add(food.getHunger(), food.getSaturationModifier());
+        if (!world.isClient) {
+            if (world.getBlockState(random).getBlock() instanceof EdibleBlock edible) {
+                FoodComponent food = edible.getFoodComponent();
+                player.getHungerManager().add(food.getHunger(), food.getSaturationModifier());
 
-            for (Pair<StatusEffectInstance, Float> pair : food.getStatusEffects()) {
-                if (pair.getFirst() != null && player.world.random.nextFloat() < pair.getSecond() && player.world.random.nextInt(4) == 0) {
-                    player.addStatusEffect(new StatusEffectInstance(pair.getFirst()));
+                for (Pair<StatusEffectInstance, Float> pair : food.getStatusEffects()) {
+                    if (pair.getFirst() != null && player.world.random.nextFloat() < pair.getSecond() && player.world.random.nextInt(4) == 0) {
+                        player.addStatusEffect(new StatusEffectInstance(pair.getFirst()));
+                    }
                 }
-            }
 
-            world.playSoundFromEntity(null, player, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.1F + 0.9F);
-        } else {
-            return ActionResult.FAIL;
+                world.playSoundFromEntity(null, player, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.1F + 0.9F);
+            } else {
+                return ActionResult.FAIL;
+            }
         }
 
         this.eatProgress++;
@@ -132,6 +135,9 @@ public class Cake {
                 world.breakBlock(pos, false);
             }
 
+            this.positions.clear();
+            this.discard();
+        } else if (this.eatProgress >= this.eatProgressMax) {
             this.positions.clear();
             this.discard();
         }
