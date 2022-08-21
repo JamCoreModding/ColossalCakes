@@ -33,6 +33,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,28 +56,37 @@ public class MixingRecipe implements Recipe<SingleStackSimpleInventory> {
 
     @Override
     public boolean matches(SingleStackSimpleInventory inventory, World world) {
-        List<ItemStack> items = inventory.getStacks();
+        List<ItemStack> items = new ArrayList<>(inventory.getStacks().stream().map(ItemStack::copy).toList());
 
         for (Ingredient ingredient : this.ingredients) {
-            for (int i = 0; i < items.size(); i++) {
-                ItemStack invStack = items.get(i);
+            boolean matchedIngredient = false;
 
-                if (invStack.isEmpty()) continue;
-                if (invStack.getCount() != 1)
-                    throw new IllegalArgumentException("Invalid stack count for mixing recipe: " + invStack.getCount());
-
-                if (ingredient.test(invStack)) {
-                    items.set(i, ItemStack.EMPTY);
+            for (ItemStack testStack : items) {
+                if (ingredient.test(testStack)) {
+                    matchedIngredient = true;
+                    items.remove(testStack);
                     break;
-                } else {
-                    if (i == items.size() - 1) {
-                        return false;
-                    }
                 }
+            }
+
+            if (!matchedIngredient) {
+                return false;
             }
         }
 
         return true;
+    }
+
+    public void clearUsedIngredients(SingleStackSimpleInventory inventory) {
+        for (Ingredient ingredient : this.ingredients) {
+            for (int i = 0; i < inventory.size(); i++) {
+                ItemStack testStack = inventory.getStack(i);
+                if (ingredient.test(testStack)) {
+                    inventory.removeStack(i);
+                    break;
+                }
+            }
+        }
     }
 
     @Override

@@ -74,12 +74,10 @@ public class RollingPinItem extends SwordItem {
         if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
         boolean success = CakeTraverser.traverse(context.getWorld(), context.getBlockPos());
         if (success && !context.getWorld().isClient){
-            System.out.println("E");
             context.getStack().damage(1, context.getPlayer(), (player) -> player.sendToolBreakStatus(context.getHand()));
             context.getWorld().playSound(null, context.getBlockPos(), ColossalCakesSounds.ITEM_ROLLING_PIN_USE, SoundCategory.PLAYERS, 0.6f, context.getWorld().random.nextFloat() * 0.5f + 0.7f);
         }
 
-        System.out.println(success);
         return success ? ActionResult.SUCCESS : ActionResult.FAIL;
     }
 

@@ -18,3 +18,9 @@ All recipes are available through EMI.
 
 To make a cake, get a collection of cakes block and place them together, then right click one of them with a rolling
 pin.
+
+## Links
+
+- [Discord](https://discord.jamalam.tech)
+- [GitHub](https://github.com/JamCoreModding/ColossalCakes)
+- [Modrinth](https://modrinth.com/mod/colossalcakes)

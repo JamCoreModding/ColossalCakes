@@ -83,7 +83,7 @@ public class MixingBowlBlock extends BlockWithEntity {
                         world.playSound(null, pos, ColossalCakesSounds.ITEM_ROLLING_PIN_USE, SoundCategory.PLAYERS, 1.0f, world.random.nextFloat() * 0.5f + 0.7f);
                     }
 
-                    mixingBowlBlockEntity.inventory.clear();
+                    match.get().clearUsedIngredients(mixingBowlBlockEntity.inventory);
 
                     return ActionResult.SUCCESS;
                 } else {
