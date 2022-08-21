@@ -26,7 +26,6 @@ package io.github.jamalam360.colossal.cakes.item;
 
 import io.github.jamalam360.colossal.cakes.cake.Cake;
 import io.github.jamalam360.colossal.cakes.cake.CakeTraverser;
-import io.github.jamalam360.colossal.cakes.registry.ColossalCakesS2CNetworking;
 import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.colossal.cakes.util.Sound;
 import net.minecraft.client.item.TooltipContext;
@@ -38,7 +37,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -73,21 +71,22 @@ public class RollingPinItem extends SwordItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        Cake tmp = Cake.get(context.getWorld(), context.getBlockPos());
-        System.out.println((context.getWorld().isClient ? "Client" : "Server") + ": " + tmp);
+        System.out.println(context.getWorld().isClient ? "C" : "S");
+        Cake c= Cake.get(context.getBlockPos());
 
-        Cake cake = CakeTraverser.traverse(context.getWorld(), context.getBlockPos(), false);
-
-        if (cake != null && !context.getWorld().isClient) {
+        if (c != null) {
+            System.out.println(c.getPositions().toString());
+        }
+        if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
+        boolean success = CakeTraverser.traverse(context.getWorld(), context.getBlockPos());
+        if (success && !context.getWorld().isClient){
+            System.out.println("E");
             context.getStack().damage(1, context.getPlayer(), (player) -> player.sendToolBreakStatus(context.getHand()));
             context.getWorld().playSound(null, context.getBlockPos(), ColossalCakesSounds.ITEM_ROLLING_PIN_USE, SoundCategory.PLAYERS, 0.6f, context.getWorld().random.nextFloat() * 0.5f + 0.7f);
-
-//            for (PlayerEntity player : context.getWorld().getPlayers()) {
-//                ColossalCakesS2CNetworking.ADD_CAKE.send((ServerPlayerEntity) player, (buf) -> buf.writeNbt(cake.write()));
-//            }
         }
 
-        return cake != null ? ActionResult.SUCCESS : ActionResult.FAIL;
+        System.out.println(success);
+        return success ? (context.getWorld().isClient ? ActionResult.PASS : ActionResult.SUCCESS) : ActionResult.FAIL;
     }
 
     @Override
