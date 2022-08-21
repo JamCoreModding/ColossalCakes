@@ -26,6 +26,7 @@ package io.github.jamalam360.colossal.cakes.item;
 
 import io.github.jamalam360.colossal.cakes.cake.Cake;
 import io.github.jamalam360.colossal.cakes.cake.CakeTraverser;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesS2CNetworking;
 import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.colossal.cakes.util.Sound;
 import net.minecraft.client.item.TooltipContext;
@@ -37,6 +38,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterials;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
@@ -70,16 +73,26 @@ public class RollingPinItem extends SwordItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (Cake.get(context.getBlockPos()) != null) return ActionResult.PASS;
-        boolean success = CakeTraverser.traverse(context.getWorld(), context.getBlockPos());
-        if (success)
+        Cake tmp = Cake.get(context.getWorld(), context.getBlockPos());
+        System.out.println((context.getWorld().isClient ? "Client" : "Server") + ": " + tmp);
+
+        Cake cake = CakeTraverser.traverse(context.getWorld(), context.getBlockPos(), false);
+
+        if (cake != null && !context.getWorld().isClient) {
             context.getStack().damage(1, context.getPlayer(), (player) -> player.sendToolBreakStatus(context.getHand()));
-        return success ? ActionResult.SUCCESS : ActionResult.FAIL;
+            context.getWorld().playSound(null, context.getBlockPos(), ColossalCakesSounds.ITEM_ROLLING_PIN_USE, SoundCategory.PLAYERS, 0.6f, context.getWorld().random.nextFloat() * 0.5f + 0.7f);
+
+//            for (PlayerEntity player : context.getWorld().getPlayers()) {
+//                ColossalCakesS2CNetworking.ADD_CAKE.send((ServerPlayerEntity) player, (buf) -> buf.writeNbt(cake.write()));
+//            }
+        }
+
+        return cake != null ? ActionResult.SUCCESS : ActionResult.FAIL;
     }
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        if (target instanceof PlayerEntity) {
+        if (target instanceof PlayerEntity && !target.world.isClient) {
             target.addStatusEffect(new StatusEffectInstance(StatusEffects.NAUSEA, target.world.random.nextInt(40) + 40, 4), attacker);
         }
 

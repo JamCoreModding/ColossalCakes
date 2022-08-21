@@ -6,10 +6,10 @@
       "nbt": "{Damage:0}"
     },
     "title": {
-      "translate": "colossal_cakes.advancements.rolling_pin.title"
+      "translate": "advancements.colossal_cakes.rolling_pin.title"
     },
     "description": {
-      "translate": "colossal_cakes.advancements.rolling_pin.description"
+      "translate": "advancements.colossal_cakes.rolling_pin.description"
     },
     "frame": "task",
     "show_toast": true,

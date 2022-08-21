@@ -27,6 +27,7 @@ package io.github.jamalam360.colossal.cakes.block.mixing;
 import io.github.jamalam360.colossal.cakes.recipe.MixingRecipe;
 import io.github.jamalam360.colossal.cakes.recipe.MixingRecipeType;
 import io.github.jamalam360.colossal.cakes.registry.ColossalCakesItems;
+import io.github.jamalam360.colossal.cakes.registry.ColossalCakesSounds;
 import io.github.jamalam360.colossal.cakes.util.SingleStackSimpleInventory;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -36,7 +37,6 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -80,17 +80,7 @@ public class MixingBowlBlock extends BlockWithEntity {
 
                         player.getStackInHand(hand).damage(1, player, (p) -> p.sendToolBreakStatus(hand));
                         player.getItemCooldownManager().set(ColossalCakesItems.WHISK, 20);
-                    } else {
-                        world.playSound(
-                                pos.getX(),
-                                pos.getY(),
-                                pos.getZ(),
-                                SoundEvents.ITEM_BUCKET_FILL,
-                                SoundCategory.BLOCKS,
-                                1.0F,
-                                world.random.range(4, 12) / 10.0F,
-                                true
-                        );
+                        world.playSound(null, pos, ColossalCakesSounds.ITEM_ROLLING_PIN_USE, SoundCategory.PLAYERS, 1.0f, world.random.nextFloat() * 0.5f + 0.7f);
                     }
 
                     mixingBowlBlockEntity.inventory.clear();

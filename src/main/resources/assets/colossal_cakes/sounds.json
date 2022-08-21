@@ -1,14 +1,26 @@
 {
   "item_rolling_pin_bonk": {
-    "subtitle": "subtitles.colossal_cakes.rolling_pin",
+    "subtitle": "subtitles.colossal_cakes.rolling_pin_attack",
     "sounds": [
       "colossal_cakes:bonk"
     ]
   },
   "item_rolling_pin_bonk_sweep": {
-    "subtitle": "subtitles.colossal_cakes.rolling_pin",
+    "subtitle": "subtitles.colossal_cakes.rolling_pin_attack",
     "sounds": [
       "colossal_cakes:bonk_sweep"
+    ]
+  },
+  "item_rolling_pin_use": {
+    "subtitle": "subtitles.colossal_cakes.rolling_pin_use",
+    "sounds": [
+      "colossal_cakes:rolling_pin"
+    ]
+  },
+  "item_whisk_use": {
+    "subtitle": "subtitles.colossal_cakes.whisk_use",
+    "sounds": [
+      "colossal_cakes:whisk"
     ]
   }
 }

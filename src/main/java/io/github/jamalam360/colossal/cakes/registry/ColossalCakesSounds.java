@@ -12,4 +12,6 @@ import net.minecraft.sound.SoundEvent;
 public class ColossalCakesSounds {
     public static final SoundEvent ITEM_ROLLING_PIN_BONK = new SoundEvent(ColossalCakesInit.idOf("item_rolling_pin_bonk"));
     public static final SoundEvent ITEM_ROLLING_PIN_BONK_SWEEP = new SoundEvent(ColossalCakesInit.idOf("item_rolling_pin_bonk_sweep"));
+    public static final SoundEvent ITEM_ROLLING_PIN_USE = new SoundEvent(ColossalCakesInit.idOf("item_rolling_pin_use"));
+    public static final SoundEvent ITEM_WHISK_USE = new SoundEvent(ColossalCakesInit.idOf("item_whisk_use"));
 }

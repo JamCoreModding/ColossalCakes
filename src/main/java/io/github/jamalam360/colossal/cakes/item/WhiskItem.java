@@ -24,8 +24,6 @@
 
 package io.github.jamalam360.colossal.cakes.item;
 
-import io.github.jamalam360.colossal.cakes.ColossalCakesInit;
-import net.minecraft.item.Item;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterials;
 
