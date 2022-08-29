@@ -31,13 +31,17 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
  * @author Jamalam
  */
+
 public class CakeTraverser {
+    /*
     public static boolean traverse(World world, BlockPos start) {
         if (!world.getBlockState(start).isIn(ColossalCakesTags.CAKE) || Cake.get(start) != null) return false;
 
@@ -81,5 +85,71 @@ public class CakeTraverser {
                 traverse(blockView, cake, explored, mutable);
             }
         }
+    }*/
+
+    public static boolean safeTraverse(BlockView world, BlockPos start) {
+        if (!world.getBlockState(start).isIn(ColossalCakesTags.CAKE) || Cake.get(start) != null) return false;
+
+        Cake cake = new Cake();
+
+        safeTraverse(world, cake, start);
+
+        if (cake.getPositions().isEmpty()) {
+            cake.discard();
+            return false;
+        }
+
+        if (world instanceof ServerWorld serverWorld) {
+            CakeState.get(serverWorld).markDirty();
+        }
+
+        return true;
     }
+
+    static long maxIterations = 10000L;
+
+    public static void safeTraverse(BlockView blockView, Cake cake, BlockPos start) {
+        HashSet<BlockPos> traversed = new HashSet<>(); //HashSet has very good contains performance
+        ArrayDeque<BlockPos> workQueue = new ArrayDeque<>(); //Very good performance for adding/removing at either end
+        workQueue.add(start.toImmutable());
+        long iterations = 0L;
+        BlockPos.Mutable cur = start.mutableCopy();
+
+        while(!workQueue.isEmpty()) {
+            BlockPos workItem = workQueue.removeFirst();
+
+            for(Direction dir : Direction.values()) {
+                //Similar to move but without the need to move back or reallocate the mutable
+                cur.set(
+                        workItem.getX()+dir.getOffsetX(),
+                        workItem.getY()+dir.getOffsetY(),
+                        workItem.getZ()+dir.getOffsetZ()
+                        );
+
+                if (!traversed.contains(cur)) {
+                    BlockPos curImmutable = cur.toImmutable();
+                    traversed.add(curImmutable);
+
+                    Cake existing = Cake.get(cur);
+
+                    if (existing!=null) {
+                        cake.add(curImmutable);
+                        cake.addAll(existing.getPositions());
+                        existing.discard();
+                        workQueue.add(curImmutable);
+                    } else if (blockView.getBlockState(cur).isIn(ColossalCakesTags.CAKE)) {
+                        cake.add(curImmutable);
+                        workQueue.add(curImmutable);
+                    }
+                }
+            }
+
+            iterations++;
+            if (iterations>maxIterations) {
+                return;
+            }
+        }
+
+    }
+
 }
