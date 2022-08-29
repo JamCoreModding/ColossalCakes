@@ -7,6 +7,9 @@
   "authors": [
     "Jamalam"
   ],
+  "contributors": [
+    "Falkreon - updated traverser implementation"
+  ],
   "contact": {
     "sources": "https://github.com/JamCoreModding/ColossalCakes",
     "issues": "https://github.com/JamCoreModding/ColossalCakes/issues"
@@ -36,9 +39,5 @@
   "suggests": {
     "emi": "*",
     "modmenu": "*"
-  },
-  "custom": {
-    "notify_gradle_properties_url": "https://raw.githubusercontent.com/JamCoreModding/ColossalCakes/main/gradle.properties",
-    "notify_gradle_properties_key": "mod_version"
   }
 }

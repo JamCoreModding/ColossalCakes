@@ -1,9 +1,5 @@
 ## Changelog
 
-### Features
+This update includes a rewritten traverser (by Falkreon), preventing stack overflows and other errors.
 
-### Fixes
-
-Closed issues: None.
-
-[Full Changelog](https://github.com/JamCoreModding/ColossalCakes/compare/...)
+[Full Changelog](https://github.com/JamCoreModding/ColossalCakes/compare/1.0.0...1.0.1)
