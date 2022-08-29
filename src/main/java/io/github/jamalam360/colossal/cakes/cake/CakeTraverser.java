@@ -106,7 +106,7 @@ public class CakeTraverser {
         return true;
     }
 
-    static long maxIterations = 10000L;
+    static long maxIterations = 3000L;
 
     public static void safeTraverse(BlockView blockView, Cake cake, BlockPos start) {
         HashSet<BlockPos> traversed = new HashSet<>(); //HashSet has very good contains performance
