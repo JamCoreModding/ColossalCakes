@@ -67,7 +67,7 @@ public class Cake {
 
     public static void read(World world, NbtCompound nbt) {
         BlockPos pos = new BlockPos(nbt.getInt("X"), nbt.getInt("Y"), nbt.getInt("Z"));
-        CakeTraverser.traverse(world, pos);
+        CakeTraverser.safeTraverse(world, pos);
         Cake.get(pos).eatProgress = nbt.getInt("EatProgress");
     }
 
@@ -76,13 +76,21 @@ public class Cake {
     }
 
     protected void add(BlockPos pos) {
+        if (this.positions.contains(pos)) return;
         this.positions.add(pos);
         this.recalculateEatProgress();
     }
 
     protected void addAll(Collection<BlockPos> positions) {
-        this.positions.addAll(positions);
-        this.recalculateEatProgress();
+        boolean modified = false;
+        
+        for(BlockPos pos : positions) {
+            if (this.positions.contains(pos)) {
+                this.positions.add(pos);
+                modified = true;
+            }
+        }
+        if (modified) this.recalculateEatProgress();
     }
 
     private void recalculateEatProgress() {
@@ -108,7 +116,7 @@ public class Cake {
 
     public ActionResult onBlockUsed(World world, PlayerEntity player) {
         if (!player.canConsume(false)) return ActionResult.FAIL;
-
+        
         BlockPos random = this.positions.get(world.random.nextInt(this.positions.size()));
 
         if (!world.isClient) {
